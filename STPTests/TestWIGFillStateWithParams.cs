@@ -1,8 +1,16 @@
 using Amib.Threading;
+#if NETCOREAPP2_0
+using System;
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 using System.Net;
 using Guid = System.Guid;
 using IntPtr = System.IntPtr;
+using SmartThreadPoolTests;
 
 namespace STPTests
 {
@@ -11,7 +19,7 @@ namespace STPTests
     /// </summary>
     [TestFixture]
     [Category("TestWIGFillStateWithArgs")]
-    public class TestWIGFillStateWithArgs
+    public class TestWIGFillStateWithArgs : TestBase
     {
         private SmartThreadPool _stp;
         private IWorkItemsGroup _wig;

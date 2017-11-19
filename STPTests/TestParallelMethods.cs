@@ -1,6 +1,13 @@
 using System.Threading;
 
+#if NETCOREAPP2_0
+using System;
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -11,8 +18,8 @@ namespace SmartThreadPoolTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestParallelMethods")]
-    public class TestParallelMethods
-	{
+    public class TestParallelMethods : TestBase
+    {
 		[Test]
 		public void TestJoin() 
 		{ 

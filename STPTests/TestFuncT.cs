@@ -1,5 +1,12 @@
 using Amib.Threading;
+#if NETCOREAPP2_0
+using System;
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 namespace SmartThreadPoolTests
 {
@@ -8,7 +15,7 @@ namespace SmartThreadPoolTests
     /// </summary>
     [TestFixture]
     [Category("TestFuncT")]
-    public class TestFuncT
+    public class TestFuncT : TestBase
     {
         private SmartThreadPool _stp;
 

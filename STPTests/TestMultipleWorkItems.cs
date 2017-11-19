@@ -1,6 +1,13 @@
 using System.Threading;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+using System;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -11,8 +18,8 @@ namespace SmartThreadPoolTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestMultipleWorkItems")]
-	public class TestMultipleWorkItems
-	{
+	public class TestMultipleWorkItems : TestBase
+    {
 		/// <summary>
 		/// Example of how to queue several work items and then wait infinitely for 
 		/// all of them to complete.

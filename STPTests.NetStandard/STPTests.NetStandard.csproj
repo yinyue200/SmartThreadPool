@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\STPTests\PermutationGenerator.cs" Link="PermutationGenerator.cs" />
+    <Compile Include="..\STPTests\QueueWorkItemHelper.cs" Link="QueueWorkItemHelper.cs" />
+    <Compile Include="..\STPTests\TestActionT.cs" Link="TestActionT.cs" />
+    <Compile Include="..\STPTests\TestCancel.cs" Link="TestCancel.cs" />
+    <Compile Include="..\STPTests\TestChainedDelegates.cs" Link="TestChainedDelegates.cs" />
+    <Compile Include="..\STPTests\TestConcurrencyChanges.cs" Link="TestConcurrencyChanges.cs" />
+    <Compile Include="..\STPTests\TestExceptions.cs" Link="TestExceptions.cs" />
+    <Compile Include="..\STPTests\TestFalseFillStateWithParams.cs" Link="TestFalseFillStateWithParams.cs" />
+    <Compile Include="..\STPTests\TestFillStateWithParams.cs" Link="TestFillStateWithParams.cs" />
+    <Compile Include="..\STPTests\TestFunc.cs" Link="TestFunc.cs" />
+    <Compile Include="..\STPTests\TestFuncT.cs" Link="TestFuncT.cs" />
+    <Compile Include="..\STPTests\TestGetResult.cs" Link="TestGetResult.cs" />
+    <Compile Include="..\STPTests\TestMaxQueueLength.cs" Link="TestMaxQueueLength.cs" />
+    <Compile Include="..\STPTests\TestMultipleWorkItems.cs" Link="TestMultipleWorkItems.cs" />
+    <Compile Include="..\STPTests\TestParallelMethods.cs" Link="TestParallelMethods.cs" />
+    <Compile Include="..\STPTests\TestPostExecute.cs" Link="TestPostExecute.cs" />
+    <Compile Include="..\STPTests\TestPriorityQueue.cs" Link="TestPriorityQueue.cs" />
+    <Compile Include="..\STPTests\TestQueueWorkItem.cs" Link="TestQueueWorkItem.cs" />
+    <Compile Include="..\STPTests\TestStartSuspended.cs" Link="TestStartSuspended.cs" />
+    <Compile Include="..\STPTests\TestStateDispose.cs" Link="TestStateDispose.cs" />
+    <Compile Include="..\STPTests\TestThreadApartmentState.cs" Link="TestThreadApartmentState.cs" />
+    <Compile Include="..\STPTests\TestThreadIsBackground.cs" Link="TestThreadIsBackground.cs" />
+    <Compile Include="..\STPTests\TestThreadPriority.cs" Link="TestThreadPriority.cs" />
+    <Compile Include="..\STPTests\TestThreadsCreate.cs" Link="TestThreadsCreate.cs" />
+    <Compile Include="..\STPTests\TestWaitForIdle.cs" Link="TestWaitForIdle.cs" />
+    <Compile Include="..\STPTests\TestWIGActionT.cs" Link="TestWIGActionT.cs" />
+    <Compile Include="..\STPTests\TestWIGChainedDelegates.cs" Link="TestWIGChainedDelegates.cs" />
+    <Compile Include="..\STPTests\TestWIGConcurrency.cs" Link="TestWIGConcurrency.cs" />
+    <Compile Include="..\STPTests\TestWIGConcurrencyChanges.cs" Link="TestWIGConcurrencyChanges.cs" />
+    <Compile Include="..\STPTests\TestWIGExceptions.cs" Link="TestWIGExceptions.cs" />
+    <Compile Include="..\STPTests\TestWIGFillStateWithParams.cs" Link="TestWIGFillStateWithParams.cs" />
+    <Compile Include="..\STPTests\TestWIGFillStateWithParams1.cs" Link="TestWIGFillStateWithParams1.cs" />
+    <Compile Include="..\STPTests\TestWIGFuncT.cs" Link="TestWIGFuncT.cs" />
+    <Compile Include="..\STPTests\TestWIGGetResult.cs" Link="TestWIGGetResult.cs" />
+    <Compile Include="..\STPTests\TestWIGMultipleWorkItems.cs" Link="TestWIGMultipleWorkItems.cs" />
+    <Compile Include="..\STPTests\TestWIGPostExecute.cs" Link="TestWIGPostExecute.cs" />
+    <Compile Include="..\STPTests\TestWIGQueueWorkItem.cs" Link="TestWIGQueueWorkItem.cs" />
+    <Compile Include="..\STPTests\TestWIGStateDispose.cs" Link="TestWIGStateDispose.cs" />
+    <Compile Include="..\STPTests\TestWIGWaitForIdle.cs" Link="TestWIGWaitForIdle.cs" />
+    <Compile Include="..\STPTests\TestWorkItemsGroups.cs" Link="TestWorkItemsGroups.cs" />
+    <Compile Include="..\STPTests\TestWorkItemsQueue.cs" Link="TestWorkItemsQueue.cs" />
+    <Compile Include="..\STPTests\TestWorkItemTimeout.cs" Link="TestWorkItemTimeout.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartThreadPool\netstandard\SmartThreadPool.NetStandard.csproj" />
+  </ItemGroup>
+
+</Project>

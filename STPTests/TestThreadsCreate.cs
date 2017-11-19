@@ -1,6 +1,12 @@
 using System;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -10,7 +16,7 @@ namespace SmartThreadPoolTests
     /// </summary>
     [TestFixture]
     [Category("TestThreadsCreate")]
-    public class TestThreadsCreate
+    public class TestThreadsCreate : TestBase
     {
         private bool _initSuccess;
         private bool _workItemSuccess;

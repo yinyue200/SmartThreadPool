@@ -1,6 +1,13 @@
 using System;
 using System.Threading;
+using SmartThreadPoolTests;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -11,8 +18,8 @@ namespace WorkItemsGroupTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestWorkItemsGroups")]
-	public class TestWorkItemsGroups
-	{
+	public class TestWorkItemsGroups : TestBase
+    {
 	    [Test]
 		public void BlockingCall() 
 		{ 

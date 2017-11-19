@@ -1,7 +1,14 @@
 using System;
 using System.Threading;
+using SmartThreadPoolTests;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -12,8 +19,8 @@ namespace WorkItemsGroupTests
 	/// </summary>
 	[TestFixture]
 	[Category("Test WorkItemsGroup GetResult")]
-	public class TestGetResult
-	{
+	public class TestGetResult : TestBase
+    {
 		/// <summary>
 		/// Example of how to queue a work item and then wait infinitely for the result.
 		/// </summary>

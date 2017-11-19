@@ -1,7 +1,14 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using SmartThreadPoolTests;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -12,8 +19,8 @@ namespace WorkItemsGroupTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestWIGConcurrencyChanges")]
-	public class TestWIGConcurrencyChanges
-	{
+	public class TestWIGConcurrencyChanges : TestBase
+    {
         [Test]
         public void TestWIGConcurrencyChange1WIG()
         {

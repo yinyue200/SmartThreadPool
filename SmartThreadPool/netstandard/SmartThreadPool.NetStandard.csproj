@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Amib.Threading</RootNamespace>
+    <AssemblyName>SmartThreadPool.NetCore</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
+
+    <Title>Amib.Threading</Title>
+    <Description>Smart Thread Pool for .NET Core</Description>
+    <Configuration />
+    <Company />
+    <Product>Amib.Threading</Product>
+    <Copyright />
+    <Version>2.3.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\CallerThreadContext.cs" Link="CallerThreadContext.cs" />
+    <Compile Include="..\CanceledWorkItemsGroup.cs" Link="CanceledWorkItemsGroup.cs" />
+    <Compile Include="..\EventWaitHandle.cs" Link="EventWaitHandle.cs" />
+    <Compile Include="..\EventWaitHandleFactory.cs" Link="EventWaitHandleFactory.cs" />
+    <Compile Include="..\Exceptions.cs" Link="Exceptions.cs" />
+    <Compile Include="..\Interfaces.cs" Link="Interfaces.cs" />
+    <Compile Include="..\InternalInterfaces.cs" Link="InternalInterfaces.cs" />
+    <Compile Include="..\PriorityQueue.cs" Link="PriorityQueue.cs" />
+    <Compile Include="..\SLExt.cs" Link="SLExt.cs" />
+    <Compile Include="..\SmartThreadPool.cs" Link="SmartThreadPool.cs" />
+    <Compile Include="..\SmartThreadPool.ThreadEntry.cs" Link="SmartThreadPool.ThreadEntry.cs" />
+    <Compile Include="..\Stopwatch.cs" Link="Stopwatch.cs" />
+    <Compile Include="..\STPEventWaitHandle.cs" Link="STPEventWaitHandle.cs" />
+    <Compile Include="..\STPPerformanceCounter.cs" Link="STPPerformanceCounter.cs" />
+    <Compile Include="..\STPStartInfo.cs" Link="STPStartInfo.cs" />
+    <Compile Include="..\SynchronizedDictionary.cs" Link="SynchronizedDictionary.cs" />
+    <Compile Include="..\WIGStartInfo.cs" Link="WIGStartInfo.cs" />
+    <Compile Include="..\WorkItem.cs" Link="WorkItem.cs" />
+    <Compile Include="..\WorkItem.WorkItemResult.cs" Link="WorkItem.WorkItemResult.cs" />
+    <Compile Include="..\WorkItemFactory.cs" Link="WorkItemFactory.cs" />
+    <Compile Include="..\WorkItemInfo.cs" Link="WorkItemInfo.cs" />
+    <Compile Include="..\WorkItemResultTWrapper.cs" Link="WorkItemResultTWrapper.cs" />
+    <Compile Include="..\WorkItemsGroup.cs" Link="WorkItemsGroup.cs" />
+    <Compile Include="..\WorkItemsGroupBase.cs" Link="WorkItemsGroupBase.cs" />
+    <Compile Include="..\WorkItemsQueue.cs" Link="WorkItemsQueue.cs" />
+  </ItemGroup>
+
+</Project>

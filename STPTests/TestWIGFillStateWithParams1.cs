@@ -1,6 +1,13 @@
 using System;
 using Amib.Threading;
+using SmartThreadPoolTests;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 using System.Net;
 
 namespace STPTests
@@ -10,7 +17,7 @@ namespace STPTests
     /// </summary>
     [TestFixture]
     [Category("TestFillStateWithParams")]
-    public class TestFillStateWithParams
+    public class TestFillStateWithParams : TestBase
     {
         private SmartThreadPool _stp;
 
@@ -18,7 +25,7 @@ namespace STPTests
         public void Init()
         {
             STPStartInfo stpStartInfo = new STPStartInfo();
-            stpStartInfo.FillStateWithParams = true;
+            stpStartInfo.FillStateWithArgs = true;//FIXME:FillStateWithParams
             _stp = new SmartThreadPool(stpStartInfo);
         }
 

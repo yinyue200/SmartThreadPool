@@ -303,7 +303,7 @@ namespace Amib.Threading
         /// </summary>
         private CanceledWorkItemsGroup _canceledSmartThreadPool = new CanceledWorkItemsGroup();
 
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
         /// <summary>
         /// Windows STP performance counters
         /// </summary>
@@ -345,7 +345,8 @@ namespace Amib.Threading
         /// A reference to the current work item a thread from the thread pool 
         /// is executing.
         /// </summary>
-        internal static ThreadEntry CurrentThreadEntry
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public static ThreadEntry CurrentThreadEntry
         {
 #if (WINDOWS_PHONE)
             get
@@ -489,7 +490,7 @@ namespace Amib.Threading
 			{
                 throw new NotSupportedException("Performance counters are not implemented for Compact Framework/Silverlight/Mono, instead use StpStartInfo.EnableLocalPerformanceCounters");
             }
-#elif !(NETCOREAPP2_0)
+#elif !(NETSTANDARD2_0)
             if (null != _stpStartInfo.PerformanceCounterInstanceName)
             {
                 try
@@ -504,7 +505,7 @@ namespace Amib.Threading
             }
 #endif
 
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
             if (_stpStartInfo.EnableLocalPerformanceCounters)
             {
                 _localPCs = new LocalSTPInstancePerformanceCounters();
@@ -608,7 +609,7 @@ namespace Amib.Threading
 
 		private void IncrementWorkItemsCount()
 		{
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 			_windowsPCs.SampleWorkItems(_workItemsQueue.Count, _workItemsProcessed);
             _localPCs.SampleWorkItems(_workItemsQueue.Count, _workItemsProcessed);
 #endif
@@ -634,7 +635,7 @@ namespace Amib.Threading
 
             Interlocked.Increment(ref _workItemsProcessed);
 
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
             if (!_shutdown)
             {
 			    // The counter counts even if the work item was cancelled
@@ -669,7 +670,7 @@ namespace Amib.Threading
 			if (_workerThreads.Contains(Thread.CurrentThread))
 			{
 				_workerThreads.Remove(Thread.CurrentThread);
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
                 _windowsPCs.SampleThreads(_workerThreads.Count, _inUseWorkerThreads);
                 _localPCs.SampleThreads(_workerThreads.Count, _inUseWorkerThreads);
 #endif
@@ -732,7 +733,7 @@ namespace Amib.Threading
 
                     // Add it to the dictionary and update its creation time.
                     _workerThreads[workerThread] = new ThreadEntry(this);
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 					_windowsPCs.SampleThreads(_workerThreads.Count, _inUseWorkerThreads);
                     _localPCs.SampleThreads(_workerThreads.Count, _inUseWorkerThreads);
 #endif
@@ -847,7 +848,7 @@ namespace Amib.Threading
 						// Execute the callback.  Make sure to accurately
 						// record how many callbacks are currently executing.
 						int inUseWorkerThreads = Interlocked.Increment(ref _inUseWorkerThreads);
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 						_windowsPCs.SampleThreads(_workerThreads.Count, inUseWorkerThreads);
                         _localPCs.SampleThreads(_workerThreads.Count, inUseWorkerThreads);
 #endif
@@ -878,7 +879,7 @@ namespace Amib.Threading
 						if (bInUseWorkerThreadsWasIncremented)
 						{
 							int inUseWorkerThreads = Interlocked.Decrement(ref _inUseWorkerThreads);
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 							_windowsPCs.SampleThreads(_workerThreads.Count, inUseWorkerThreads);
                             _localPCs.SampleThreads(_workerThreads.Count, inUseWorkerThreads);
 #endif
@@ -915,7 +916,7 @@ namespace Amib.Threading
 
 		private void ExecuteWorkItem(WorkItem workItem)
 		{
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 			_windowsPCs.SampleWorkItemsWaitTime(workItem.WaitingTime);
             _localPCs.SampleWorkItemsWaitTime(workItem.WaitingTime);
 #endif
@@ -925,7 +926,7 @@ namespace Amib.Threading
 			}
 			finally
 			{
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 				_windowsPCs.SampleWorkItemsProcessTime(workItem.ProcessTime);
                 _localPCs.SampleWorkItemsProcessTime(workItem.ProcessTime);
 #endif
@@ -997,7 +998,7 @@ namespace Amib.Threading
 		{
 			ValidateNotDisposed();
 
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
 			ISTPInstancePerformanceCounters pcs = _windowsPCs;
 
 			if (NullSTPInstancePerformanceCounters.Instance != _windowsPCs)
@@ -1026,7 +1027,7 @@ namespace Amib.Threading
 			}
 
 			int millisecondsLeft = millisecondsTimeout;
-#if (NETCOREAPP2_0)
+#if (NETSTANDARD2_0)
             var stopwatch = Internal.Stopwatch.StartNew();
 #else
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -1087,7 +1088,14 @@ namespace Amib.Threading
 							// In case the thread has been terminated 
 							// after the check if it is alive.
 						}
-					}
+#if NETSTANDARD2_0
+                        catch (PlatformNotSupportedException e)
+                        {
+                            e.GetHashCode();
+                            //TODO:解决该问题
+                        }
+#endif
+                    }
 				}
 			}
 		}
@@ -1302,7 +1310,7 @@ namespace Amib.Threading
 			return workItemsGroup;
 		}
 
-        #region Fire Thread's Events
+#region Fire Thread's Events
 
         private void FireOnThreadInitialization()
         {
@@ -1344,7 +1352,7 @@ namespace Amib.Threading
             }
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// This event is fired when a thread is created.
@@ -1402,9 +1410,9 @@ namespace Amib.Threading
 	        }
 	    }
 
-		#endregion
+#endregion
 
-		#region Properties
+#region Properties
 
 		/// <summary>
 		/// Get/Set the lower limit of threads in the pool.
@@ -1535,7 +1543,7 @@ namespace Amib.Threading
             get { return _shutdown;  }
 	    }
 
-#if !(NETCOREAPP2_0)
+#if !(NETSTANDARD2_0)
         /// <summary>
         /// Return the local calculated performance counters
         /// Available only if STPStartInfo.EnableLocalPerformanceCounters is true.
@@ -1545,9 +1553,9 @@ namespace Amib.Threading
             get { return (ISTPPerformanceCountersReader)_localPCs; }
         }
 #endif
-        #endregion
+#endregion
 
-        #region IDisposable Members
+#region IDisposable Members
 
         public void Dispose()
         {
@@ -1582,9 +1590,9 @@ namespace Amib.Threading
                 throw new ObjectDisposedException(GetType().ToString(), "The SmartThreadPool has been shutdown");
             }
         }
-        #endregion
+#endregion
 
-        #region WorkItemsGroupBase Overrides
+#region WorkItemsGroupBase Overrides
 
         /// <summary>
         /// Get/Set the maximum number of work items that execute cocurrency on the thread pool
@@ -1725,9 +1733,9 @@ namespace Amib.Threading
 	        ValidateQueueIsWithinLimits();
         }
 
-        #endregion
+#endregion
 
-        #region Join, Choice, Pipe, etc.
+#region Join, Choice, Pipe, etc.
 
         /// <summary>
         /// Executes all actions in parallel.
@@ -1828,7 +1836,7 @@ namespace Amib.Threading
         {
             Pipe(pipeState, (IEnumerable<Action<T>>)actions);
         }
-        #endregion
+#endregion
 	}
-	#endregion
+#endregion
 }

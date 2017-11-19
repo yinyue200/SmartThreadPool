@@ -1,8 +1,14 @@
 using System;
 using System.Threading;
+using SmartThreadPoolTests;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
-
+using TestBase=System.Object;
+#endif
 using Amib.Threading;
 
 namespace WorkItemsGroupTests
@@ -12,8 +18,8 @@ namespace WorkItemsGroupTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestWIGConcurrency")]
-	public class TestWIGConcurrency
-	{
+	public class TestWIGConcurrency : TestBase
+    {
 		private Random _randGen;
 		private int [] _concurrentOps;
 		private int _concurrencyPerWig;

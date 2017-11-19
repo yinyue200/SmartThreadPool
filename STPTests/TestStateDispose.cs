@@ -1,7 +1,13 @@
 using System;
 using System.Threading;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -48,8 +54,8 @@ namespace SmartThreadPoolTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestStateDispose")]
-	public class TestStateDispose
-	{
+	public class TestStateDispose : TestBase
+    {
 	    /// <summary>
         /// Example of non disposable caller state
         /// </summary>

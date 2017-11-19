@@ -1,5 +1,12 @@
 using Amib.Threading;
+using SmartThreadPoolTests;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 namespace WorkItemsGroupTests
 {
@@ -8,7 +15,7 @@ namespace WorkItemsGroupTests
     /// </summary>
     [TestFixture]
     [Category("TestWIGActionT")]
-    public class TestWIGActionT
+    public class TestWIGActionT : TestBase
     {
         private SmartThreadPool _stp;
         private IWorkItemsGroup _wig;

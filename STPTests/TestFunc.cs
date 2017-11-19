@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 
 using Amib.Threading;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+using SmartThreadPoolTests;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 namespace STPTests
 {
@@ -12,7 +19,7 @@ namespace STPTests
     /// </summary>
     [TestFixture]
     [Category("TestFuncT")]
-    public class TestFuncT
+    public class TestFuncT : TestBase
     {
         [Test]
         public void FuncT()

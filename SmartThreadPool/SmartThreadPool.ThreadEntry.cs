@@ -4,11 +4,12 @@ using Amib.Threading.Internal;
 
 namespace Amib.Threading
 {
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public partial class SmartThreadPool
     {
         #region ThreadEntry class
 
-        internal class ThreadEntry
+        public class ThreadEntry
         {
             /// <summary>
             /// The thread creation time

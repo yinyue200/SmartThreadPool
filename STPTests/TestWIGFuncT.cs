@@ -1,11 +1,19 @@
 using Amib.Threading;
+using SmartThreadPoolTests;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+using System;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 namespace WorkItemsGroupTests
 {
     [TestFixture]
     [Category("TestWIGFuncT")]
-    public class TestWIGFuncT
+    public class TestWIGFuncT : TestBase
     {
         private SmartThreadPool _stp;
         private IWorkItemsGroup _wig;

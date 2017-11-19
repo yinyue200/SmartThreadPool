@@ -1,4 +1,10 @@
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 using SmartThreadPoolTests;
@@ -10,8 +16,8 @@ namespace WorkItemsGroupTests
 	/// </summary>
 	[TestFixture]
     [Category("TestQueueWorkItem")]
-    public class TestQueueWorkItem
-	{
+    public class TestQueueWorkItem : TestBase
+    {
         private SmartThreadPool _stp;
         private IWorkItemsGroup _wig;
 

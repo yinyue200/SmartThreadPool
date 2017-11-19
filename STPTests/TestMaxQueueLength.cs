@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Threading;
 using Amib.Threading;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+using RequiresThread = SmartThreadPoolTests.RequiresThreadAtteibute;
+using SmartThreadPoolTests;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 namespace STPTests
 {
     [TestFixture]
     [Category("TestMaxQueueLength")]
-    public class TestMaxQueueLength
+    public class TestMaxQueueLength : TestBase
     {
         [Test]
         public void QueueWorkItem_WhenMaxIsNull_Queues()

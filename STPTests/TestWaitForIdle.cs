@@ -2,7 +2,13 @@ using System;
 using System.Threading;
 using System.Diagnostics;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -13,8 +19,8 @@ namespace SmartThreadPoolTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestWaitForIdle")]
-	public class TestWaitForIdle
-	{
+	public class TestWaitForIdle : TestBase
+    {
 	    /// <summary>
         /// Example of waiting for idle
         /// </summary>

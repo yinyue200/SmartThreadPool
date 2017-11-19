@@ -1,6 +1,12 @@
 using System.Threading;
 
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
 using Amib.Threading;
 
@@ -11,8 +17,8 @@ namespace SmartThreadPoolTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestStartSuspended")]
-	public class TestStartSuspended
-	{
+	public class TestStartSuspended : TestBase
+    {
 	    [Test]
 		public void StartSuspended()
 		{

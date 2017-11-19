@@ -1,5 +1,12 @@
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 using Amib.Threading.Internal;
+using SmartThreadPoolTests;
 
 namespace PriorityQueueTests
 {
@@ -8,8 +15,8 @@ namespace PriorityQueueTests
 	/// </summary>
 	[TestFixture]
 	[Category("TestWorkItemsQueue")]
-	public class TestWorkItemsQueue
-	{
+	public class TestWorkItemsQueue : TestBase
+    {
 	    [Test]
 		public void Init()
 		{

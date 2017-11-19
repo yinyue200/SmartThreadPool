@@ -1,18 +1,23 @@
+using Amib.Threading;
+#if NETCOREAPP2_0
+using Test = Xunit.FactAttribute;
+using TestBase = SmartThreadPoolTests.NunitTestBase;
 using System;
-using Amib.Threading;
+#else
 using NUnit.Framework;
+using TestBase=System.Object;
+#endif
 
-using Amib.Threading;
 
 namespace SmartThreadPoolTests
 {
-	/// <summary>
-	/// Summary description for TestExceptions.
-	/// </summary>
-	[TestFixture]
+    /// <summary>
+    /// Summary description for TestExceptions.
+    /// </summary>
+    [TestFixture]
 	[Category("TestExceptions")]
-	public class TestExceptions
-	{
+	public class TestExceptions : TestBase
+    {
 		private class DivArgs
 		{
 			public int x;
@@ -37,10 +42,10 @@ namespace SmartThreadPoolTests
 			}
 			catch(WorkItemResultException wire)
 			{
-				Assert.IsTrue(wire.InnerException is DivideByZeroException);
+				Assert.IsTrue(wire.InnerException is System.DivideByZeroException);
 				return;
 			}
-			catch(Exception e)
+			catch(System.Exception e)
 			{
                 e.GetHashCode();
 				Assert.Fail();
@@ -62,19 +67,19 @@ namespace SmartThreadPoolTests
 			IWorkItemResult wir = 
 				_smartThreadPool.QueueWorkItem(new WorkItemCallback(this.DoDiv), divArgs);
 
-			Exception e = null;
+            System.Exception e = null;
 			try
 			{
 				wir.GetResult(out e);
 			}
-			catch (Exception ex)
+			catch (System.Exception ex)
 			{
                 ex.GetHashCode();
 				success = false;
 			}
 
 			Assert.IsTrue(success);
-			Assert.IsTrue(e is DivideByZeroException);
+			Assert.IsTrue(e is System.DivideByZeroException);
 		}
 
         private object DoDiv(object state)
@@ -88,18 +93,18 @@ namespace SmartThreadPoolTests
 		{ 
 			SmartThreadPool smartThreadPool = new SmartThreadPool();
 
-	        var workItemResult = smartThreadPool.QueueWorkItem(new Amib.Threading.Func<int>(ExceptionMethod));
+	        var workItemResult = smartThreadPool.QueueWorkItem(new Func<int>(ExceptionMethod));
 
             smartThreadPool.WaitForIdle();
 
-            Assert.IsInstanceOf<NotImplementedException>(workItemResult.Exception);
+            Assert.IsInstanceOf<System.NotImplementedException>(workItemResult.Exception);
 
             smartThreadPool.Shutdown();
         }
 
 	    public int ExceptionMethod()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 	}
 }
